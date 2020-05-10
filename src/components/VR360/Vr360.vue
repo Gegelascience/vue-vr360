@@ -32,6 +32,9 @@ import { Renderer, createWebGLContext } from "./class/render/core/renderer";
 import { SkyboxNode } from "./class/render/nodes/skybox";
 import { InlineViewerHelper } from "./class/util/inline-viewer-helper";
 
+import WebXRPolyfill from "webxr-polyfill";
+let polyfill = new WebXRPolyfill();
+
 export default {
   name: "Vr360",
   components: {

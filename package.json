@@ -9,7 +9,9 @@
   },
   "dependencies": {
     "core-js": "^2.6.5",
-    "vue": "^2.6.10"
+    "gl-matrix": "^3.3.0",
+    "vue": "^2.6.10",
+    "webxr-polyfill": "^2.0.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.12.0",
@@ -29,7 +31,9 @@
       "plugin:vue/essential",
       "eslint:recommended"
     ],
-    "rules": {},
+    "rules": {
+      "no-console": "off"
+    },
     "parserOptions": {
       "parser": "babel-eslint"
     }

@@ -222,30 +222,57 @@ export default {
           this.prevTouchY = touch.pageY;
         }
       }
+    },
+
+    changeImg(imgPath, display) {
+      this.scene.addNode(
+        new SkyboxNode({
+          url: imgPath,
+          displayMode: display
+        })
+      );
+    },
+    updateCanvas(canvasStyle) {
+      if (canvasStyle && canvasStyle.width) {
+        this.customCanvasBackground["width"] = canvasStyle.width + "vw";
+      }
+      if (canvasStyle && canvasStyle.height) {
+        this.customCanvasBackground["height"] = canvasStyle.height + "vh";
+      }
+    },
+    updateBtnStyle(btnStyle) {
+      if (btnStyle && btnStyle.backColor) {
+        this.customButtonBackground["background-color"] = btnStyle.backColor;
+      }
     }
   },
   watch: {
     imgSrc: function(newVal) {
       if (newVal !== null && newVal !== undefined) {
-        this.scene.addNode(
-          new SkyboxNode({
-            url: newVal,
-            displayMode: this.displayMode
-          })
-        );
+        this.changeImg(newVal, this.displayMode);
       } else {
         console.error("path to image invalid");
       }
+    },
+    displayMode: function(newVal) {
+      if (newVal !== null && newVal !== undefined) {
+        this.changeImg(newVal, this.displayMode);
+      } else {
+        console.error("path to image invalid");
+      }
+    },
+    customCanvasStyle: function(newVal) {
+      this.updateCanvas(newVal);
+    },
+    customButtonStyle: function(newVal) {
+      this.updateBtnStyle(newVal);
     }
   },
   mounted() {
+    this.updateCanvas(this.customCanvasStyle);
+    this.updateBtnStyle(this.customButtonStyle);
     if (this.imgSrc !== null && this.imgSrc !== undefined) {
-      this.scene.addNode(
-        new SkyboxNode({
-          url: this.imgSrc,
-          displayMode: this.displayMode
-        })
-      );
+      this.changeImg(this.imgSrc, this.displayMode);
       this.initXR();
     }
   },

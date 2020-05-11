@@ -13,8 +13,8 @@
         version="1.1"
         x="0px"
         y="0px"
-        :width="aspectDim"
-        :height="logoHeight"
+        v-bind:width="aspectDim"
+        v-bind:height="logoHeight"
         viewBox="0 0 28 18"
         xml:space="preserve"
       >
@@ -46,8 +46,8 @@ export default {
       defaultOptionsStyle: Object,
       enabled: Boolean,
       session: Object,
-      logoHeight: Number,
-      aspectDim: Number,
+      logoHeight: String,
+      aspectDim: String,
       disabled: Boolean,
       myOpacity: Number,
       title: String,
@@ -74,18 +74,18 @@ export default {
       const borderRadius = this.getBorderRadius(height, corners);
       const fontSize = height / 3;
 
-      this.logoHeight = (height * _LOGO_SCALE) / 3;
-      this.aspectDim = (height * _LOGO_SCALE * 14) / 27;
+      this.logoHeight = (height * _LOGO_SCALE) / 3 + "px";
+      this.aspectDim = (height * _LOGO_SCALE * 14) / 27 + "px";
 
       this.customButtonUIStyle["border-color"] =
         this.optionsStyle && this.optionsStyle.color
           ? this.optionsStyle.color
           : this.defaultOptionsStyle.color;
-      this.customButtonUIStyle["border-radius.px"] = borderRadius;
-      this.customButtonUIStyle["min-width.px"] = fontSize;
+      this.customButtonUIStyle["border-radius"] = borderRadius + "px";
+      this.customButtonUIStyle["min-width"] = fontSize + "px";
 
-      this.customLogoOKUIStyle["width.px"] = height + fontSize;
-      this.customLogoOKUIStyle["height.px"] = height - fontSize / 2;
+      this.customLogoOKUIStyle["width"] = height + fontSize + "px";
+      this.customLogoOKUIStyle["height"] = height - fontSize / 2 + "px";
       this.customLogoOKUIStyle["fill"] =
         this.optionsStyle && this.optionsStyle.color
           ? this.optionsStyle.color

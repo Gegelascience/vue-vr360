@@ -5,13 +5,12 @@
       <button v-on:click="switchImg()">switch image</button>
     </div>
     <div class="test">
-      <Vr360 v-bind:imgSrc="testImg" :customCanvasStyle="{width:70, height:70}" />
+      <Vr360 v-bind:imgSrc="testImg" :customCanvasStyle="{width:50, height:60}" />
     </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
 import Vr360 from "./components/VR360/Vr360.vue";
 
 export default {

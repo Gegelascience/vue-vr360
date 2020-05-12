@@ -1,5 +1,8 @@
 <template>
-  <div v-bind:style="customCanvasBackground" class="componentContainer">
+  <div
+    :style="{'width': customCanvasBackground.width,'height': customCanvasBackground.height}"
+    class="componentContainer"
+  >
     <div class="canvasContainer">
       <canvas
         ref="webxrContainer"
@@ -15,7 +18,6 @@
       ref="myVrButton"
       class="vrButton"
       v-bind:class="{hideBtn: !showVRButton}"
-      v-bind:style="customButtonBackground"
       v-bind:optionsStyle="customButtonStyle"
       v-bind:RequestSession="onRequestSession"
       v-bind:EndSession="onEndSession"
@@ -33,7 +35,7 @@ import { SkyboxNode } from "./class/render/nodes/skybox";
 import { InlineViewerHelper } from "./class/util/inline-viewer-helper";
 
 import WebXRPolyfill from "webxr-polyfill";
-let polyfill = new WebXRPolyfill();
+new WebXRPolyfill();
 
 export default {
   name: "Vr360",
@@ -56,7 +58,6 @@ export default {
       inlineViewerHelper: Object,
       gl: Object,
       scene: Object,
-      customButtonBackground: Object,
       customCanvasBackground: Object,
       primaryTouch: Object,
       prevTouchX: Number,
@@ -239,11 +240,6 @@ export default {
       if (canvasStyle && canvasStyle.height) {
         this.customCanvasBackground["height"] = canvasStyle.height + "vh";
       }
-    },
-    updateBtnStyle(btnStyle) {
-      if (btnStyle && btnStyle.backColor) {
-        this.customButtonBackground["background-color"] = btnStyle.backColor;
-      }
     }
   },
   watch: {
@@ -263,14 +259,10 @@ export default {
     },
     customCanvasStyle: function(newVal) {
       this.updateCanvas(newVal);
-    },
-    customButtonStyle: function(newVal) {
-      this.updateBtnStyle(newVal);
     }
   },
   mounted() {
     this.updateCanvas(this.customCanvasStyle);
-    this.updateBtnStyle(this.customButtonStyle);
     if (this.imgSrc !== null && this.imgSrc !== undefined) {
       this.changeImg(this.imgSrc, this.displayMode);
       this.initXR();
@@ -281,8 +273,7 @@ export default {
     this.inlineViewerHelper = null;
     this.gl = null;
     this.scene = new Scene();
-    this.customButtonBackground = {};
-    this.customCanvasBackground = {};
+
     window.addEventListener("resize", this.onResize);
   },
   destroyed() {

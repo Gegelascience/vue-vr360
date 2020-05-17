@@ -3,9 +3,11 @@
     <img alt="Vue logo" src="./assets/logo.png" />
     <div>
       <button v-on:click="switchImg()">switch image</button>
+      <button v-on:click="biggerCanvas(true)">++ canvas</button>
+      <button v-on:click="biggerCanvas(false)">-- canvas</button>
     </div>
     <div class="test">
-      <Vr360 v-bind:imgSrc="testImg" :customCanvasStyle="{width:50, height:60}" />
+      <Vr360 v-bind:imgSrc="testImg" :customCanvasDimensions="{width:dimension, height:dimension}" />
     </div>
   </div>
 </template>
@@ -22,10 +24,18 @@ export default {
     return {
       testImg: {
         type: String
-      }
+      },
+      dimension: Number
     };
   },
   methods: {
+    biggerCanvas(more) {
+      if (more) {
+        this.dimension += 10;
+      } else {
+        this.dimension -= 10;
+      }
+    },
     switchImg() {
       if (
         this.testImg ===
@@ -42,6 +52,7 @@ export default {
   created() {
     this.testImg =
       "https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Castle_Church_of_Lutherstadt_Wittenberg_%28interior%2C_full_spherical_panoramic_image%2C_equirectangular_projection%29.jpg/1280px-Castle_Church_of_Lutherstadt_Wittenberg_%28interior%2C_full_spherical_panoramic_image%2C_equirectangular_projection%29.jpg";
+    this.dimension = 80;
   }
 };
 </script>

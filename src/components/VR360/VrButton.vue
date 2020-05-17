@@ -36,7 +36,6 @@
 export default {
   name: "VrButton",
   props: {
-    optionsStyle: String,
     RequestSession: Function,
     EndSession: Function,
     RequestFullScreen: Function
@@ -55,21 +54,17 @@ export default {
       customLogoOKUIStyle: Object
     };
   },
-  watch: {
-    optionsStyle() {
-      this.setCustomStyle();
-    }
-  },
+
   methods: {
-    setCustomStyle() {
+    setCustomStyle(styleData) {
       const _LOGO_SCALE = 0.8;
       const height =
-        this.optionsStyle && this.optionsStyle.height
-          ? this.optionsStyle.height
+        styleData && styleData.height
+          ? styleData.height
           : this.defaultOptionsStyle.height;
       const corners =
-        this.optionsStyle && this.optionsStyle.corners
-          ? this.optionsStyle.corners
+        styleData && styleData.corners
+          ? styleData.corners
           : this.defaultOptionsStyle.corners;
       const borderRadius = this.getBorderRadius(height, corners);
       const fontSize = height / 3;
@@ -78,8 +73,8 @@ export default {
       this.aspectDim = (height * _LOGO_SCALE * 14) / 27 + "px";
 
       this.customButtonUIStyle["border-color"] =
-        this.optionsStyle && this.optionsStyle.color
-          ? this.optionsStyle.color
+        styleData && styleData.color
+          ? styleData.color
           : this.defaultOptionsStyle.color;
       this.customButtonUIStyle["border-radius"] = borderRadius + "px";
       this.customButtonUIStyle["min-width"] = fontSize + "px";
@@ -87,8 +82,8 @@ export default {
       this.customLogoOKUIStyle["width"] = height + fontSize + "px";
       this.customLogoOKUIStyle["height"] = height - fontSize / 2 + "px";
       this.customLogoOKUIStyle["fill"] =
-        this.optionsStyle && this.optionsStyle.color
-          ? this.optionsStyle.color
+        styleData && styleData.color
+          ? styleData.color
           : this.defaultOptionsStyle.color;
     },
 
@@ -163,7 +158,7 @@ export default {
     this.customButtonUIStyle = {};
 
     this.customLogoOKUIStyle = {};
-    this.setCustomStyle();
+    this.setCustomStyle(this.defaultOptionsStyle);
   }
 };
 </script>

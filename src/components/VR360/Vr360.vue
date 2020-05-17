@@ -1,8 +1,5 @@
 <template>
-  <div
-    :style="{'width': customCanvasBackground.width,'height': customCanvasBackground.height}"
-    class="componentContainer"
-  >
+  <div v-bind:style="updateCanvasDimension" class="componentContainer">
     <div class="canvasContainer">
       <canvas
         ref="webxrContainer"
@@ -46,7 +43,7 @@ export default {
     imgSrc: String,
     displayMode: String,
     customButtonStyle: Object,
-    customCanvasStyle: Object,
+    customCanvasDimensions: Object,
     showVRButton: {
       type: Boolean,
       default: true
@@ -58,10 +55,17 @@ export default {
       inlineViewerHelper: Object,
       gl: Object,
       scene: Object,
-      customCanvasBackground: Object,
       primaryTouch: Object,
       prevTouchX: Number,
-      prevTouchY: Number
+      prevTouchY: Number,
+      canvasWidth: {
+        type: String,
+        default: "80vw"
+      },
+      canvasHeight: {
+        type: String,
+        default: "80vh"
+      }
     };
   },
   methods: {
@@ -232,14 +236,6 @@ export default {
           displayMode: display
         })
       );
-    },
-    updateCanvas(canvasStyle) {
-      if (canvasStyle && canvasStyle.width) {
-        this.customCanvasBackground["width"] = canvasStyle.width + "vw";
-      }
-      if (canvasStyle && canvasStyle.height) {
-        this.customCanvasBackground["height"] = canvasStyle.height + "vh";
-      }
     }
   },
   watch: {
@@ -256,13 +252,21 @@ export default {
       } else {
         console.error("path to image invalid");
       }
-    },
-    customCanvasStyle: function(newVal) {
-      this.updateCanvas(newVal);
+    }
+  },
+  computed: {
+    updateCanvasDimension() {
+      var canvasDimensions = { width: "80vw", height: "80vh" };
+      if (this.customCanvasDimensions && this.customCanvasDimensions.width) {
+        canvasDimensions.width = this.customCanvasDimensions.width + "vw";
+      }
+      if (this.customCanvasDimensions && this.customCanvasDimensions.height) {
+        canvasDimensions.height = this.customCanvasDimensions.height + "vh";
+      }
+      return canvasDimensions;
     }
   },
   mounted() {
-    this.updateCanvas(this.customCanvasStyle);
     if (this.imgSrc !== null && this.imgSrc !== undefined) {
       this.changeImg(this.imgSrc, this.displayMode);
       this.initXR();

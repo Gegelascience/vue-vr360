@@ -1,6 +1,6 @@
 # vue-360vr
 
-NgxView360 let you use 360 photo viewer in VR using VueJs technology.
+vue-360vr let you use 360 photo viewer in VR using VueJs technology.
 This library adapt one of the samples from [WebXR Sample](https://github.com/immersive-web/webxr-samples).
 A great thanks to *The Immersive Web Community Group*.
 

@@ -1,11 +1,39 @@
 {
   "name": "vue-360vr",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0",
+  "description": "An API to use 360 view in VR with VueJs framework ",
+  "author": "VERCHERE Rémi",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Gegelascience/vue-vr360.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Gegelascience/vue-vr360/issues"
+  },
+  "homepage": "https://github.com/Gegelascience/vue-vr360",
+  "keywords": [
+    "vue",
+    "vuejs",
+    "javascript",
+    "webxr",
+    "VR",
+    "360"
+  ],
+  "license": "MIT",
+  "private": false,
+  "main": "./dist/Vr360.common.js",
+  "files": [
+    "dist/*",
+    "src/*",
+    "public/*",
+    "*.json",
+    "*.js"
+  ],
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "build-lib": "vue-cli-service build --target lib --name Vr360 ./src/components/VR360/Vr360.vue"
   },
   "dependencies": {
     "core-js": "^2.6.5",

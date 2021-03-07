@@ -14,7 +14,7 @@
     <VrButton
       ref="myVrButton"
       class="vrButton"
-      v-bind:class="{hideBtn: !showVRButton}"
+      v-bind:class="{ hideBtn: !showVRButton }"
       v-bind:optionsStyle="customButtonStyle"
       v-bind:RequestSession="onRequestSession"
       v-bind:EndSession="onEndSession"
@@ -22,6 +22,7 @@
     ></VrButton>
   </div>
 </template>
+
 
 
 <script>
@@ -37,7 +38,7 @@ new WebXRPolyfill();
 export default {
   name: "Vr360",
   components: {
-    VrButton
+    VrButton,
   },
   props: {
     imgSrc: String,
@@ -46,10 +47,10 @@ export default {
     customCanvasDimensions: Object,
     showVRButton: {
       type: Boolean,
-      default: true
-    }
+      default: true,
+    },
   },
-  data: function() {
+  data: function () {
     return {
       xrImmersiveRefSpace: Object,
       inlineViewerHelper: Object,
@@ -60,18 +61,18 @@ export default {
       prevTouchY: Number,
       canvasWidth: {
         type: String,
-        default: "80vw"
+        default: "80vw",
       },
       canvasHeight: {
         type: String,
-        default: "80vh"
-      }
+        default: "80vh",
+      },
     };
   },
   methods: {
     initXR() {
       if (navigator.xr) {
-        navigator.xr.isSessionSupported("immersive-vr").then(supported => {
+        navigator.xr.isSessionSupported("immersive-vr").then((supported) => {
           this.$refs.myVrButton.enabled = supported;
           this.$refs.myVrButton.updateButtonState();
         });
@@ -85,7 +86,7 @@ export default {
 
       this.gl = createWebGLContext(
         {
-          xrCompatible: true
+          xrCompatible: true,
         },
         this.$refs.webxrContainer
       );
@@ -103,12 +104,12 @@ export default {
     onRequestSession() {
       return navigator.xr
         .requestSession("immersive-vr")
-        .then(session => {
+        .then((session) => {
           this.$refs.myVrButton.setSession(session);
           session.isImmersive = true;
           this.onSessionStarted(session);
         })
-        .catch(err => {
+        .catch((err) => {
           const errorMsg = `XRSession creation failed: ${err.message}`;
           console.error(errorMsg);
           this.$refs.myVrButton.setDisabledAttribute(true);
@@ -124,7 +125,7 @@ export default {
       const glLayer = new window.XRWebGLLayer(session, this.gl);
       session.updateRenderState({ baseLayer: glLayer });
       const refSpaceType = session.isImmersive ? "local" : "viewer";
-      session.requestReferenceSpace(refSpaceType).then(refSpace => {
+      session.requestReferenceSpace(refSpaceType).then((refSpace) => {
         if (session.isImmersive) {
           this.xrImmersiveRefSpace = refSpace;
         } else {
@@ -233,26 +234,26 @@ export default {
       this.scene.addNode(
         new SkyboxNode({
           url: imgPath,
-          displayMode: display
+          displayMode: display,
         })
       );
-    }
+    },
   },
   watch: {
-    imgSrc: function(newVal) {
+    imgSrc: function (newVal) {
       if (newVal !== null && newVal !== undefined) {
         this.changeImg(newVal, this.displayMode);
       } else {
         console.error("path to image invalid");
       }
     },
-    displayMode: function(newVal) {
+    displayMode: function (newVal) {
       if (newVal !== null && newVal !== undefined) {
         this.changeImg(newVal, this.displayMode);
       } else {
         console.error("path to image invalid");
       }
-    }
+    },
   },
   computed: {
     updateCanvasDimension() {
@@ -264,7 +265,7 @@ export default {
         canvasDimensions.height = this.customCanvasDimensions.height + "vh";
       }
       return canvasDimensions;
-    }
+    },
   },
   mounted() {
     if (this.imgSrc !== null && this.imgSrc !== undefined) {
@@ -282,7 +283,7 @@ export default {
   },
   destroyed() {
     window.removeEventListener("resize", this.onResize);
-  }
+  },
 };
 </script>
 

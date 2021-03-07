@@ -1,26 +1,15 @@
 {
   "name": "vue-360vr",
-  "version": "1.0.1",
+  "version": "1.0.2",
+  "private": false,
   "description": "An API to use 360 view in VR with VueJs framework ",
   "author": "VERCHERE Rémi",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Gegelascience/vue-vr360.git"
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "build-lib": "vue-cli-service build --target lib --name Vr360 ./src/components/VR360/Vr360.vue"
   },
-  "bugs": {
-    "url": "https://github.com/Gegelascience/vue-vr360/issues"
-  },
-  "homepage": "https://github.com/Gegelascience/vue-vr360",
-  "keywords": [
-    "vue",
-    "vuejs",
-    "javascript",
-    "webxr",
-    "VR",
-    "360"
-  ],
-  "license": "MIT",
-  "private": false,
   "main": "./dist/Vr360.common.js",
   "files": [
     "dist/*",
@@ -29,25 +18,19 @@
     "*.json",
     "*.js"
   ],
-  "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "build-lib": "vue-cli-service build --target lib --name Vr360 ./src/components/VR360/Vr360.vue"
-  },
   "dependencies": {
-    "core-js": "^2.6.5",
+    "core-js": "^3.6.5",
     "gl-matrix": "^3.3.0",
     "vue": "^2.6.10",
     "webxr-polyfill": "^2.0.2"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.12.0",
-    "@vue/cli-plugin-eslint": "^3.12.0",
-    "@vue/cli-service": "^3.12.0",
-    "babel-eslint": "^10.0.1",
-    "eslint": "^5.16.0",
-    "eslint-plugin-vue": "^5.0.0",
+    "@vue/cli-plugin-babel": "^4.5.11",
+    "@vue/cli-plugin-eslint": "^4.5.11",
+    "@vue/cli-service": "^4.5.11",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^6.7.2",
+    "eslint-plugin-vue": "^6.2.2",
     "vue-template-compiler": "^2.6.10"
   },
   "eslintConfig": {
@@ -74,5 +57,22 @@
   "browserslist": [
     "> 1%",
     "last 2 versions"
-  ]
+  ],
+  "bugs": {
+    "url": "https://github.com/Gegelascience/vue-vr360/issues"
+  },
+  "homepage": "https://github.com/Gegelascience/vue-vr360",
+  "keywords": [
+    "vue",
+    "vuejs",
+    "javascript",
+    "webxr",
+    "VR",
+    "360"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Gegelascience/vue-vr360.git"
+  }
 }
